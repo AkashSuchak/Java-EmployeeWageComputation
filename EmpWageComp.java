@@ -1,51 +1,40 @@
 //Author :  Akash Suchak
-//Switch Case : Computing Month Wage Of Employee(Fulltime And PartTime)
+//Calculate Monthly Wage Untill TotalWorkingHours Or Days is reached
 
 //package
 import java.util.Random;
 
 public class EmpWageComp {
     public static void main(String[] args){
-        //object of class
-        EmpWageComp ewc = new EmpWageComp();
+        //Assign Values for wage
+        int wagePerHour=20;
+        int fullDayHours=8;
+        int halfDayHours=4;
+        int workingDays=20;
+        int totalWorkingHours=0;
 
-        //To Generate Randoms 0, 1 and 2
-        Random ran= new Random();
-        int ran1 = ran.nextInt(3);
+        for (int i=0; i<workingDays; i++) {
+            //To Generate Randoms 0, 1 and 2
+            Random ran = new Random();
+            int ran1 = ran.nextInt(3);
 
-        //Employee is Present or Not
-        switch (ran1){
-            case 0 :
-                System.out.println("Employee is Present and Working FullTime");
-                ewc.fullTime();
+            //Employee is Present or Not
+            if (ran1 == 0) {
+                totalWorkingHours += fullDayHours;
+            } else if (ran1 == 1) {
+                totalWorkingHours += halfDayHours;
+            } else {
+                totalWorkingHours += 0;
+            }
+            //Setting Working Hours 100 if greater than 100
+            if (totalWorkingHours > 100) {
+                totalWorkingHours = 100;
                 break;
-            case 1:
-                System.out.println("Employee is Present and Working PartTime");
-                ewc.partTime();
-                break;
-            case 2:
-                System.out.println("Employee is Absent");
-                break;
+            }
         }
-
-    }
-    //Method to count Fulltime Month Wage
-    public void fullTime(){
-        int wagePerHr = 20;
-        int dailyWorkHrs = 8;
-        int workingDays = 20;
-
-        int totalMonthWage = wagePerHr * dailyWorkHrs * workingDays;
-        System.out.println("Monthly Wage : " + totalMonthWage);
-    }
-    //Method to count Parttime Month Wage
-    public void partTime(){
-        int wagePerHr = 20;
-        int dailyWorkHrs = 4;
-        int workingDays = 20;
-
-        int totalMonthWage = wagePerHr * dailyWorkHrs * workingDays;
-        System.out.println("Monthly Wage : " + totalMonthWage);
+        //Display Total Working Hours with Total Wage
+        int totalMonthlyWage=totalWorkingHours * wagePerHour;
+        System.out.println("Total Working Hours : " + totalWorkingHours );
+        System.out.println("Total Wage : " + totalMonthlyWage);
     }
 }
-
