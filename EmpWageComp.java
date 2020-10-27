@@ -1,5 +1,5 @@
 //Author :  Akash Suchak
-//Computing Day Wage Of Employee(Fulltime And PartTime)
+//Switch Case : Computing Day Wage Of Employee(Fulltime And PartTime)
 
 //package
 import java.util.Random;
@@ -14,14 +14,18 @@ public class EmpWageComp {
         int ran1 = ran.nextInt(3);
 
         //Employee is Present or Not
-        if( ran1 == 0 ) {
-            System.out.println("Employee is Present and Working FullTime");
-            ewc.fullTime();
-        }else if (ran1 == 1){
-            System.out.println("Employee is Present and Working PartTime");
-            ewc.partTime();
-        }else {
-            System.out.println("Employee is Absent");
+        switch (ran1){
+            case 0 :
+                System.out.println("Employee is Present and Working FullTime");
+                ewc.fullTime();
+                break;
+            case 1:
+                System.out.println("Employee is Present and Working PartTime");
+                ewc.partTime();
+                break;
+            case 2:
+                System.out.println("Employee is Absent");
+                break;
         }
 
     }
