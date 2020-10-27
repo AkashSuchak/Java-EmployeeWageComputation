@@ -1,5 +1,5 @@
 //Author :  Akash Suchak
-//Switch Case : Computing Day Wage Of Employee(Fulltime And PartTime)
+//Switch Case : Computing Month Wage Of Employee(Fulltime And PartTime)
 
 //package
 import java.util.Random;
@@ -29,20 +29,23 @@ public class EmpWageComp {
         }
 
     }
-    //Method to count Fulltime Day Wage
+    //Method to count Fulltime Month Wage
     public void fullTime(){
         int wagePerHr = 20;
         int dailyWorkHrs = 8;
+        int workingDays = 20;
 
-        int totalDayWage = wagePerHr * dailyWorkHrs;
-        System.out.println("Wage : " + totalDayWage);
+        int totalMonthWage = wagePerHr * dailyWorkHrs * workingDays;
+        System.out.println("Monthly Wage : " + totalMonthWage);
     }
-    //Method to count Parttime Day Wage
+    //Method to count Parttime Month Wage
     public void partTime(){
         int wagePerHr = 20;
         int dailyWorkHrs = 4;
+        int workingDays = 20;
 
-        int totalDayWage = wagePerHr * dailyWorkHrs;
-        System.out.println("Wage : " + totalDayWage);
+        int totalMonthWage = wagePerHr * dailyWorkHrs * workingDays;
+        System.out.println("Monthly Wage : " + totalMonthWage);
     }
 }
+
