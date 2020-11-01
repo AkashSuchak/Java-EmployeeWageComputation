@@ -1,89 +1,67 @@
 //Author :  Akash Suchak
-//Compute Employee Wage for Multiple Compmnies
+//Total Wage for Each Company 
 
 //packages
 import java.util.Random;
-import java.util.Scanner;
 
+class EmpWageBuilder{
+    private final String company;
+    private final int wagePerHour;
+    private final int workingDays;
+    private final int maxMonthHours;
+    private int totalMonthlyWage;
+    //Constructor
+    EmpWageBuilder(String company, int wagePerHour, int workingDays, int maxMonthHours) {
+        this.company = company;
+        this.wagePerHour = wagePerHour;
+        this.workingDays = workingDays;
+        this.maxMonthHours = maxMonthHours;
 
-public class EmpWageComp {
-    //Variables To Count Month Wages
-    static int day = 1,totalWorkingHours = 0;
-    //static int fullDayHours = 8, halfDayHours = 4, wagePerHour = 20 ;
+    }
 
-    public static void main(String[] args) {
-        System.out.println("welcome To Employee Wage Computation");
-        int companyCount = 1;
-        while (true){
-            System.out.println("----------------------------------------------");
-            System.out.println("Employee Wage Computation for Company "+companyCount);
-            System.out.println("----------------------------------------------");
-            //User-Inputs
-            Scanner input = new Scanner(System.in);
+    //Computing Wage for Companies
+    public void totalWage() {
+        //Variables
+        int totalWorkingHours=0, fullDayHours=8, halfDayHours=4;
+        for (int i=0; i<workingDays; i++) {
+            //To Generate Randoms 0, 1 and 2
+            Random ran = new Random();
+            int ran1 = ran.nextInt(3);
 
-            System.out.println("Enter Wage Per Hour : ");
-            int wph = input.nextInt();
-
-            System.out.println("Enter Full Day Hours : ");
-            int fdh = input.nextInt();
-
-            System.out.println("Enter Half Day Hours : ");
-            int hdh = input.nextInt();
-
-            System.out.println("Enter Maximum Number of Days Employee can Work In a Month : ");
-            int d = input.nextInt();
-
-            System.out.println("Enter Maximum Working Hours Employee can Work In a Month : ");
-            int twh = input.nextInt();
-
-            EmpWageComp emp = new EmpWageComp();
-            System.out.println("----------------------------------------------");
-	    emp.days(fdh,hdh,d);
-            //Setting Working Hours 100 if greater 100
-            if (totalWorkingHours > twh) {
-                totalWorkingHours = twh;
+            //Employee is Present or Not
+            if (ran1 == 0) {
+                totalWorkingHours += fullDayHours;
+            } else if (ran1 == 1) {
+                totalWorkingHours += halfDayHours;
+            } else {
+                totalWorkingHours += 0;
             }
-            emp.totalWage(wph);
-	    System.out.println("----------------------------------------------");
 
-            System.out.println("Do You Want count for one more Company..?");
-            System.out.println("Press y for yes");
-            System.out.println("Press n for no");
-            Scanner scanner = new Scanner(System.in);
-            String cnfrm = scanner.nextLine();
-            if(cnfrm.equals("y") || cnfrm.equals("yes")){
-                companyCount+=1;
-                continue;
-            }else if (cnfrm.equals("n") || cnfrm.equals("no")){
-                System.out.println("Have a Nice Day. Thank You!");
+            if (totalWorkingHours > maxMonthHours) {
+                totalWorkingHours = maxMonthHours;
                 break;
             }
-
         }
+        //Counting Total Monthly Wage
+        totalMonthlyWage=totalWorkingHours * wagePerHour;
     }
-
-    //Method of Display Total Working Hours with Total Wage
-    public void totalWage(int wagePerHour) {
-        int totalMonthlyWage = totalWorkingHours * wagePerHour;
-        System.out.println("Employee worked " + totalWorkingHours + " Hours in a Month");
-        System.out.println("Employee Wage : " + totalMonthlyWage);
+    @Override
+    public String toString(){
+        return "Total employee Wage for " + company + " is : "+ totalMonthlyWage;
     }
-    //Method to count 20 days
-    public void days(int fullDayHours, int halfDayHours, int d) {
-        //To Generate Randoms 0, 1 and 2
-        Random ran = new Random();
-        int ran1 = ran.nextInt(3);
+}
 
-        //Employee is Present or Not
-        if (ran1 == 0) {
-            totalWorkingHours += fullDayHours;
-        } else if (ran1 == 1) {
-            totalWorkingHours += halfDayHours;
-        }
-        day += 1;
-        if (day <= d) {
-            EmpWageComp emp = new EmpWageComp();
-            emp.days(fullDayHours, halfDayHours, d);
-        }
+public class EmpWageComp {
+
+    public static void main(String[] args) {
+        System.out.println("Welcome To Employee Wage Computation");
+        System.out.println("====================================");
+        EmpWageBuilder company1 = new EmpWageBuilder("company1",20,20,100);
+        company1.totalWage();
+        System.out.println(company1);
+        System.out.println("---------------------------------------");
+        EmpWageBuilder company2 = new EmpWageBuilder("company2", 25,25, 120);
+        company2.totalWage();
+        System.out.println(company2);
     }
 }
